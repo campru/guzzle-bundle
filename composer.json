@@ -1,34 +1,33 @@
 {
-    "name": "playbloom/guzzle-bundle",
-    "description": "Provide Symfony2 web profiler for Guzzle",
-    "keywords": ["guzzle", "Symfony2", "profiler"],
-    "homepage": "https://github.com/ludofleury/GuzzleBundle",
-    "type": "symfony-bundle",
+    "name": "campru/guzzle-bundle",
+    "type": "silex-bundle",
+    "description": "Provide Silex web profiler for Guzzle",
+    "keywords": ["silex", "guzzle", "profiler"],
+    "homepage": "https://github.com/campru/guzzle-bundle",
     "license": "MIT",
-    "minimum-stability": "dev",
     "authors": [
         {
-            "name": "Ludovic Fleury",
-            "email": "ludo.fleury@gmail.com"
+            "name": "David Camprubí",
+            "email": "david.camprubi@gmail.com"
         }
     ],
-    "require": {
-        "php": ">=5.3.0",
-        "guzzle/guzzle": "3.*",
-        "symfony/web-profiler-bundle": "~2.1",
-        "symfony/http-foundation": "~2.1",
-        "symfony/http-kernel": "~2.1",
-        "symfony/config": "~2.1",
-        "symfony/dependency-injection": "~2.1"
-
-    },
     "autoload": {
-        "psr-0": { "Playbloom\\Bundle\\GuzzleBundle": "" }
-    },
-    "target-dir": "Playbloom/Bundle/GuzzleBundle",
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.0.x-dev"
+        "psr-4": {
+            "Campru\\GuzzleBundle\\": "src/"
         }
-    }
+    },
+    "require": {
+        "php": ">=5.4.0",
+        "silex/silex": "~1.2",
+        "silex/web-profiler": "~1.0",
+        "guzzlehttp/guzzle": "~5.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": ">=3.7.0"
+    },
+    "scripts": {
+        "tests": "vendor/bin/phpunit --colors tests/unit/"
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
 }
