@@ -1,7 +1,7 @@
 .idea
 
 # PHP
-vendor
+./vendor/
 
 # CI
 build/coverage
