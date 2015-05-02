@@ -1,18 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit colors="true" bootstrap="Tests/bootstrap.php">
-    <testsuites>
-        <testsuite name="PlaybloomGuzzleBundle Test Suite">
-            <directory>./Tests</directory>
-        </testsuite>
-    </testsuites>
+<phpunit
+    bootstrap="./tests/bootstrap.php"
+    colors="true"
+    backupGlobals="false"
+    backupStaticAttributes="false"
+    strict="true"
+    verbose="true">
+
+    <logging>
+        <log type="coverage-html" target="./build/coverage" />
+        <log type="coverage-clover" target="./build/logs/clover.xml"/>
+        <log type="coverage-crap4j" target="./build/logs/crap4j.xml"/>
+        <log type="coverage-xml" target="./build/logs/coverage"/>
+        <log type="junit" target="./build/logs/phpunit.xml" logIncompleteSkipped="false"/>
+    </logging>
 
     <filter>
-        <whitelist>
-            <directory>./</directory>
+        <whitelist addUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">./src</directory>
             <exclude>
-                <directory>./vendor</directory>
-                <directory>./Tests</directory>
-                <directory>./Resources</directory>
+                <directory suffix=".php">./src/Provider</directory>
             </exclude>
         </whitelist>
     </filter>
