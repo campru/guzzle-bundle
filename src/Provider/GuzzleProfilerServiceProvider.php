@@ -20,18 +20,20 @@ class GuzzleProfilerServiceProvider implements ServiceProviderInterface
     public function register(Application $app)
     {
         if (!isset($app['data_collector.templates'])) {
-            throw new \LogicException('The provider: "'.__CLASS__.'" must be registered after the "WebProfilerServiceProvider"');
+            throw new \LogicException(
+                'The provider: "'.__CLASS__.'" must be registered after the "WebProfilerServiceProvider"'
+            );
         }
 
-        $dataCollectorTemplates = $app->raw('data_collector.templates');
-        $dataCollectorTemplates[] = ['guzzle', '@CampruGuzzle/views/Collector/guzzle.html.twig'];
-        $app['data_collector.templates'] = $dataCollectorTemplates;
+        $dataCollectorTpls   = $app->raw('data_collector.templates');
+        $dataCollectorTpls[] = ['guzzle', '@CampruGuzzle/views/Collector/guzzle.html.twig'];
+        $app['data_collector.templates'] = $dataCollectorTpls;
 
-        $app['guzzle_bundle.subscriber.profiler'] = $app->share(function() {
+        $app['guzzle_bundle.subscriber.profiler'] = $app->share(function () {
             return new \GuzzleHttp\Subscriber\History;
         });
 
-        $app['guzzle_bundle.subscriber.storage'] = $app->share(function() {
+        $app['guzzle_bundle.subscriber.storage'] = $app->share(function () {
             return new \Campru\GuzzleBundle\Subscriber\Stopwatch(new \SplObjectStorage);
         });
 
@@ -47,9 +49,9 @@ class GuzzleProfilerServiceProvider implements ServiceProviderInterface
         }));
 
         $app['guzzle_bundle.profiler.templates_path'] = function () {
-            $r = new \ReflectionClass('Campru\GuzzleBundle\DataCollector\GuzzleDataCollector');
+            $class = new \ReflectionClass('Campru\GuzzleBundle\DataCollector\GuzzleDataCollector');
 
-            return dirname(dirname($r->getFileName())).'/../resources';
+            return dirname(dirname($class->getFileName())).'/../resources';
         };
 
         $app['twig.loader.filesystem'] = $app->share($app->extend('twig.loader.filesystem', function ($loader, $app) {
