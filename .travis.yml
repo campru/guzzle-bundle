@@ -10,4 +10,4 @@ before_script:
   - php composer.phar --dev install
 
 script:
-  - phpunit -c phpunit.xml.dist tests/unit/
+  - phpunit --colors tests/unit/
