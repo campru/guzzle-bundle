@@ -10,5 +10,4 @@ before_script:
   - php composer.phar --dev install
 
 script:
-  - phpunit -c phpunit.xml.dist --coverage-text --exclude-group functional
-  - phpunit -c phpunit.xml.dist --coverage-text --group functional
+  - phpunit -c phpunit.xml.dist
