@@ -25,9 +25,11 @@ class GuzzleProfilerServiceProvider implements ServiceProviderInterface
             );
         }
 
-        $dataCollectorTpls   = $app->raw('data_collector.templates');
-        $dataCollectorTpls[] = ['guzzle', '@CampruGuzzle/views/Collector/guzzle.html.twig'];
-        $app['data_collector.templates'] = $dataCollectorTpls;
+        $app['data_collector.templates'] = $app->extend('data_collector.templates', function ($tpls) {
+            $tpls[] = ['guzzle', '@CampruGuzzle/views/Collector/guzzle.html.twig'];
+
+            return $tpls;
+        });
 
         $app['guzzle_bundle.subscriber.profiler'] = $app->share(function () {
             return new \GuzzleHttp\Subscriber\History;
